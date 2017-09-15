@@ -1,0 +1,24 @@
+//起動時に指定するため、コメントアウト
+//#!/usr/bin/env node --optimize_for_size --max_old_space_size=700 --gc_interval=100
+
+//
+// 起動スクリプト
+//
+
+var path = require("path");
+
+// カレントの絶対パスを取得
+var absPath = path.resolve(__dirname + '/..');
+
+// Babel ES6
+require("babel-core/register")({
+  only: [
+    new RegExp("^" + absPath + "/app.js"),
+    new RegExp("^" + absPath + "/s/"),
+    new RegExp("^" + absPath + "/test/")
+  ]
+});
+
+// Start!!
+require("../app").start();
+

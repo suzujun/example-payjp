@@ -1,0 +1,41 @@
+extends layout/_layout
+block contents
+  div.jumbotron
+    h1 subscription products
+    p.lead 月額商品マスタ管理
+    a.btn.btn-lg.btn-primary(href='#' role='button' data-toggle='modal' data-target='#entityModal') 新規登録
+  div.row
+    div.col-md-12
+      table.table
+        thead
+          tr
+            th id
+            th タイトル
+            th トライアル日数
+            th 金額
+            th ステータス
+            th #
+        tbody
+          for p in products
+            tr
+              td p.id
+              td p.name
+              td p.trial_days
+              td p.amount
+              td p.status
+              td
+                button.btn 編集
+                button.btn.btn-delete 削除
+
+  .modal.fade#entityModal
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5.modal-title titledesu
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(area-hidden='true') &times;
+        .modal-body
+          p modal mody desu
+        .modal-footer
+          button.btn.btn-primary(type='button') 保存
+          button.btn.btn-secondary(type='button' data-dismiss='modal') キャンセル

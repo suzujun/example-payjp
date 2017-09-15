@@ -1,0 +1,36 @@
+extends layout/_layout
+block contents
+  div.jumbotron.
+    <h1>payjp example</h1>
+    <p class="lead">このページはpayjpを検証するサイトです.</p>
+    <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+  div.row
+    div.col-md-3
+      h2 customer
+      button.btn.btn-info(type='button') ユーザ管理
+    div.col-md-3
+      h2 charge
+      button.btn.btn-info(type='button') 支払い
+    div.col-md-3
+      h2 plan
+      a.btn.btn-info(href='/subscription_product') 月額商品管理
+    div.col-md-3
+      h2 subscription
+      button.btn.btn-info(type='button') 月額
+  div.row
+    div.col-md-3
+      h2 transfer
+      button.btn.btn-info(type='button') 入金
+    div.col-md-3
+      h2 event
+      button.btn.btn-info(type='button') イベント
+    div.col-md-3
+      h2 product
+      button.btn.btn-info(type='button') プロダクト
+    div.col-md-3
+      h2 account
+      button.btn.btn-info(type='button') アカウント
+  div.row
+    div.col-md-3
+      h2 token
+      button.btn.btn-info(type='button') トークン(クレジットカード登録)

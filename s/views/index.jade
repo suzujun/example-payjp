@@ -1,0 +1,85 @@
+extends layout/_layout
+block contents
+  div.jumbotron.
+    <h1>FRESH! ~ payjp test example ~</h1>
+    <p class="lead">このページはpayjpを検証するサイトです.</p>
+  div.row
+    if user === undefined
+      div.col-md-12
+        .alert.alert-info(role='alert') あなたは初めてのユーザです。
+        h2 クレジットカード登録
+        p 月額会員入会のためのクレジットカード情報を登録します
+      div.col-xs-6.col-sm-6.col-md-6
+        form(method='post')
+          include _card
+          .form-group
+            label(for='#nickname') ニックネーム
+            input.form-control#nickname(type="text" name='nickname')
+          .form-group
+            label(for='#email') Email
+            input.form-control#email(type="email" name='email' aria-describedby='emailHelp')
+            small.form-text.text-muted#emailHelp
+          button.btn.btn-primary(type='submit') 登録
+        script
+          | $(document).ready(function(){
+          |    card = new Skeuocard($("#skeuocard"));
+          |  });
+      div.col-xs-6.col-sm-6.col-md-6
+        include _testcard
+    else if error !== undefined
+      div.col-md-12
+        .alert.alert-error(role='alert') エラーが発生しました err=[#{error}]
+    else
+      if registed === true
+        .col-md-12
+          .alert.alert-success(role='alert') 登録処理が正常に完了しました
+      else
+        .col-md-12
+          .alert.alert-info(role='alert') あなたは登録済みのユーザです。
+      .col-md-12
+        h2 登録情報
+        .user
+          p ニックネーム: #{user.description}
+          for card, i in user.cards.data
+            .col-md-3.col-sm-4.col-xs-6
+              .card
+                .card-body
+                  h6.card-title クレジットカード ##{i}
+                  p.card-text
+                    | 種類: #{card.brand}<br>
+                    | 番号: xxxx-xxxx-xxxx-#{card.last4}<br>
+                    | 有効期限: #{card.exp_month} / #{card.exp_year}
+        hr
+
+        h2 月額課金
+        if user.subscriptions.count === 10
+          p 月額課金中のアイテムはありません。
+        else
+          table.table
+            thead
+              tr
+                th id
+                th タイトル
+                th 月額
+                th ステータス
+                th #
+            tbody
+              for ss in user.subscriptions.data
+                tr
+                  td #{ss.id}
+                  td #{ss.plan.name}
+                  td #{ss.plan.amount}
+                  td 購読中
+                  td
+                    button.btn.btn-danger(type='submit') 購読解除
+        div 
+
+        if products !== undefined
+          h3 月額課金登録
+          form(method='post')
+            .form-group
+              label(for='#email') チャンネル
+              select.form-control(name='registSubscriptionId')
+                for product in products
+                  option(value='#{product.id}') #{product.name} ￥#{product.amount}-
+            button.btn.btn-primary(type='submit') 購読登録

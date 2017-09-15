@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title payjp - example
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css')
+    script(src='https://code.jquery.com/jquery-3.0.0.min.js', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js', crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js', crossorigin='anonymous')
+    link(rel='stylesheet', href='/s/skeuocard/skeuocard.css')
+    script(src='/s/skeuocard/skeuocard.min.js', crossorigin='anonymous')
+  body
+    include _nav
+    div.container
+      block contents
+    blockquote.blockquote.text-center
+      p.mb-0 payjp test example
+      footer.blockquote-footer produce by suzujun
+script
+  | $(function(){
+  |   console.log(">>>>>>>>.load")
+  |   $(document).on('focus', function(){
+  |     console.log("onfocus",Date.now());location.reload()
+  |   })
+  | })
